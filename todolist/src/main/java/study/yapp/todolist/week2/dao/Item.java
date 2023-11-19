@@ -37,7 +37,7 @@ public class Item {
         this.updated_date = updated_date;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

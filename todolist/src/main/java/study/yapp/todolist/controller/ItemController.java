@@ -77,6 +77,12 @@ public class ItemController {
         return new Response<>(result);
     }
 
+    /**
+     * bulk api
+     * @param count
+     * @param memberId
+     * @return
+     */
     @PostMapping("/todo/bulk")
     public ResponseEntity<Response<ItemDto.ResponseBulkItem>> createBulkItem(@RequestParam(name = "count") Long count, @RequestParam(name = "memberId") Long memberId) {
         ItemDto.ResponseBulkItem result = itemService.createBulk(count, memberId);

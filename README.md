@@ -7,6 +7,8 @@
 ### Based Dependency
 * Java: 11
 * Springboot: 2.7
+* MySQL: 8.0
+* Spring Data JPA
 <hr>
 
 ### ERD
@@ -14,6 +16,7 @@
 
 
 ### API
+basic path: /api/v1
 * 회원가입: /signup [POST]
   {
     "name":"aaa",
@@ -38,10 +41,7 @@
     "title":
     "contents":
   }
-* todo 삭제: /todo [DELETE]
-  {
-    "itemId":
-    "memberId":
-  }
+* todo 삭제: /todo?itemId={itemId}&memberId={memberId} [DELETE]
 * todo 단건 조회: /todo/{todoId} [GET]
 * todo 다건 조회: /member/{memberId}/todo [GET]
+* todo bulk api: /todo/bulk?count={count}&memberId={memberId} [POST]

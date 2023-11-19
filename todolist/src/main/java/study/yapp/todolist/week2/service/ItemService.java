@@ -15,7 +15,6 @@ import study.yapp.todolist.week2.repository.MemberRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -88,13 +87,12 @@ public class ItemService {
      */
     @Transactional
     public ItemDto.ResponseDeleteItemDto deleteItem(Long itemId, Long memberId) {
-        Item item = itemRepository.findById(itemId).get();
-        if (item == null) {
-            throw new InvalidItemException("존재하지 않는 항목입니다.", ResponseCode.INVALID_ITEM);
-        }
+        Item item = itemRepository.findById(itemId).orElseThrow(() -> new InvalidItemException("존재하지 않는 항목입니다.", ResponseCode.INVALID_ITEM));
+
         if (item.getMember().getId() != memberId) {
             throw new InvalidItemException("잘못된 유저의 삭제 시도입니다.", ResponseCode.INVALID_USER_ACCESS);
         }
+
         itemRepository.deleteById(itemId);
 
         ItemDto.ResponseDeleteItemDto result = ItemDto.ResponseDeleteItemDto.builder()
@@ -112,10 +110,7 @@ public class ItemService {
      * @return
      */
     public ItemDto.ResponseItemDto getItem(Long itemId) {
-        Item item = itemRepository.findById(itemId).get();
-        if (item == null) {
-            throw new InvalidItemException("존재하지 않는 항목입니다.", ResponseCode.INVALID_ITEM);
-        }
+        Item item = itemRepository.findById(itemId).orElseThrow(() -> new InvalidItemException("존재하지 않는 항목입니다.", ResponseCode.INVALID_ITEM));
 
         ItemDto.ResponseItemDto result = ItemDto.ResponseItemDto.builder()
                 .itemId(item.getId())

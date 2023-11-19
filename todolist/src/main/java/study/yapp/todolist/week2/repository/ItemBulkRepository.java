@@ -33,8 +33,6 @@ public class ItemBulkRepository {
                         ps.setDate(3, new Date(item.getCreated_date().getTime()));
                         ps.setDate(4, new Date(item.getUpdated_date().getTime()));
                         ps.setLong(5, item.getMember().getId());
-                        //                    ps.setLong(6, item.getId());
-
                     }
 
                     @Override
